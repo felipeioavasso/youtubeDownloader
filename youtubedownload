@@ -1,0 +1,20 @@
+###############
+############### INSTALL PYTUBE
+###############
+
+#pip install pytube
+from pytube import YouTube
+
+def baixar(link):
+    video = YouTube(link, use_oauth=True, allow_oauth_cache=True)
+    video = video.streams.get_highest_resolution()
+    titulo = video.title
+    if input("Você deseja mesmo fazer o download do video '{}'?".format(titulo.upper())) == "s":
+        try:
+            video.download()
+            print("Sucesso")
+        except:
+            print("Desculpe, ocorreu um erro.")
+
+link = input("Insira o link do vídeo: ")
+baixar(link)
